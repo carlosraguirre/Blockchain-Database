@@ -10,16 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_16_164512) do
+ActiveRecord::Schema.define(version: 2022_06_16_172729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
+    t.bigint "transaction_id", null: false
     t.string "address"
-    t.decimal "balance"
+    t.string "balance"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["transaction_id"], name: "index_addresses_on_transaction_id"
   end
 
   create_table "blocks", force: :cascade do |t|
@@ -29,6 +31,7 @@ ActiveRecord::Schema.define(version: 2022_06_16_164512) do
   end
 
   create_table "transactions", force: :cascade do |t|
+    t.bigint "block_id", null: false
     t.string "transaction_hash"
     t.integer "number_of_confirmations"
     t.string "timestamp"
@@ -36,6 +39,9 @@ ActiveRecord::Schema.define(version: 2022_06_16_164512) do
     t.string "transaction_fee"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["block_id"], name: "index_transactions_on_block_id"
   end
 
+  add_foreign_key "addresses", "transactions"
+  add_foreign_key "transactions", "blocks"
 end
