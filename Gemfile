@@ -47,3 +47,5 @@ group :development do
 end
 
 gem 'sprockets', '~>3.0'
+
+gem 'active_model_serializers'
