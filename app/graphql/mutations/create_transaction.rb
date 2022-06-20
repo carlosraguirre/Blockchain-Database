@@ -5,7 +5,7 @@ class Mutations::CreateTransaction < Mutations::BaseMutation
   argument :value, String, required: true
   argument :transaction_fee, String, required: true
 
-  field :transaction, Types::TransactionType, null: false
+  field :transactions, Types::TransactionType, null: false
   field :errors, [String], null: false
 
   def resolve(transaction_hash:, number_of_confirmations:, timestamp:, value:, transaction_fee:)
@@ -25,6 +25,7 @@ class Mutations::CreateTransaction < Mutations::BaseMutation
 end
 
 
+# Run mutation in GraphiQl:
 
 # mutation {
 #   createTransaction(input: {

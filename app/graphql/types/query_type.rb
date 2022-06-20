@@ -10,6 +10,8 @@ module Types
       Block.find(id)
     end
 
+# Run query in GraphiQl:
+
   # query {
   #   block(id: 1) {
   #     id
@@ -33,6 +35,7 @@ module Types
   # }
   # ---------------------------------------------------------------------------
 
+
   # Query for an individual address
     field :address, Types::AddressType, null: false do
       argument :id, ID, required: true
@@ -41,6 +44,8 @@ module Types
     def address(id:)
       Address.find(id)
     end
+
+# Run query in GraphiQl:
 
   # query {
   #   address(id: 1) {
@@ -52,6 +57,7 @@ module Types
   # }
   # ---------------------------------------------------------------------------
 
+
   # Query for an individual transaction
     field :transaction, Types::TransactionType, null: false do
       argument :id, ID, required: true
@@ -60,6 +66,8 @@ module Types
     def transaction(id:)
       Transaction.find(id)
     end
+
+# Run query in GraphiQl:
 
   # query {
   #   transaction(id: 1) {
